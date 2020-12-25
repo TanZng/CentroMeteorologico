@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <title>Centro Meteorológico</title>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    {# Tailwind #}
+    {#  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> #}
+
+    {% block head %} {% endblock %}
+
+</head>
+<body>
+
+
+<div class="container">
+{# NavBar #}
+{% block navbar %} {% endblock %}
+
+{# Contenido #}
+{% block content %}
+{% endblock %}
+
+</div>
+
+{% block footer %} {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends "base_menu.html" %}
+{% block content %}
+    <h1>Mi Centro Meteorologico</h1>
+    <h3>El tiempo de hoy es...</h3>
+
+{% if ciudades_list %}
+    {# Despliega las ciudades #}
+    {% for city in ciudades_list %}
+        <h4>{{ city.nombre_tarjeta }}</h4>
+        <img src="http://openweathermap.org/img/w/{{ city.icon }}.png" alt="Image">
+        <span class="title"> Ciudad: {{ city.city }}</span>
+        <span class="subtitle">{{ city.temperature }}° C</span>
+        <br> <p> desc: {{ city.description }}</p>
+
+    {% endfor %}
+
+{% else %}
+    {# Cuando no hay ciudades que mostrar #}
+    <p>  ¡Aun no has elegido que ciudades seguir! </p>
+    <p> Dirigete a "Mis tarjetas" para elegir las ciudades</p>
+
+{% endif %}
+
+    {% if user.is_anonymous %}
+        <p> Para elegir que ciudades mostrar debes iniciar sesión </p>
+        <p> ¿No tienes una cuenta? Registrate </p>
+    {% endif %}
+
+
+
+{% endblock %}

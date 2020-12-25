@@ -1,0 +1,23 @@
+{% extends "base_tailwind.html" %}
+{% block navbar %}
+
+<nav class="navbar navbar-default navbar-inverse">
+  <div class="container-fluid">
+    <div class="text-3xl">
+        <a class="navbar-brand" href="/"> Centro Meteorológico </a>
+    </div>
+    <!-- https://stackoverflow.com/questions/22047251/django-dynamically-get-view-url-and-check-if-its-the-current-page -->
+  </div>
+   {% if user.is_authenticated %}
+
+       <a href="{% url 'logout' %}?next={% url 'climaApp:main' %}"> Logout </a></li>
+       <br>
+       <a href="{% url 'climaApp:tarjeta_list' %}"> Mis tarjetas </a>
+
+   {% else %}
+
+       <a href="{% url 'login' %}?next={% url 'climaApp:main' %}"> Login </a>
+
+   {% endif %}
+</nav>
+{% endblock %}
