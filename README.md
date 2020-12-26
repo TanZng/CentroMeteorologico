@@ -12,10 +12,26 @@ python manage.py migrate
 
 Checar que todo está bien
 ```
-python manage.py check
+python manage.py check 
 ```
 
 Iniciar servidor local
 ```
 python manage.py runserver
 ```
+
+recuerda agregar el archivo .env en el root del proyecto
+
+SECRET_KEY=
+
+DEBUG=True
+
+DB_NAME=appclima
+
+DB_USER=root
+
+DB_PASSWORD=tu_contraseña
+
+DB_HOST=localhost
+
+API_KEY=
