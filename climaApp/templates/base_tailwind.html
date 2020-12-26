@@ -5,6 +5,7 @@
     <title>Centro Meteorológico</title>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
 
     {# Tailwind #}
@@ -13,10 +14,9 @@
     {% block head %} {% endblock %}
 
 </head>
-<body>
+<body class="container mx-auto mt-5 bg-gray-50">
 
 
-<div class="container">
 {# NavBar #}
 {% block navbar %} {% endblock %}
 
@@ -24,7 +24,7 @@
 {% block content %}
 {% endblock %}
 
-</div>
+
 
 {% block footer %} {% endblock %}
 
