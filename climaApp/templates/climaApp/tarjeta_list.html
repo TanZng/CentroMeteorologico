@@ -7,7 +7,8 @@
       <div>
         <h3>{{ tarjeta.nombre }}</h3>
         <p>Ciudad: {{ tarjeta.ciudad }}
-        (<a href="{% url 'climaApp:tarjeta_update' tarjeta.id %}">Edit</a> |
+            {# Link Editar Trajeta #}
+        (<a class="text-purple-500 no-underline hover:underline"href="{% url 'climaApp:tarjeta_update' tarjeta.id %}">Edit</a> |
         <a href="{% url 'climaApp:tarjeta_delete' tarjeta.id %}">Delete</a>)
         </p>
       </div>
