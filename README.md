@@ -10,6 +10,10 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
+Crear superusuario
+```
+python manage.py createsuperuser
+```
 Checar que todo está bien
 ```
 python manage.py check 
