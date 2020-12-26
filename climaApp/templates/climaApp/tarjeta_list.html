@@ -3,6 +3,7 @@
 <h1>Mis Tarjetas</h1>
 <p>
 {% if tarjeta_list %}
+
   {% for tarjeta in tarjeta_list %}
       <div>
         <h3>{{ tarjeta.nombre }}</h3>
@@ -12,11 +13,17 @@
         <a href="{% url 'climaApp:tarjeta_delete' tarjeta.id %}">Delete</a>)
         </p>
       </div>
+
   {% endfor %}
+
 {% else %}
+
     <p> Aun no tienes tarjetas 😢</p>
+
 {% endif %}
+
 </p>
+
 <p>
 <a href="{% url 'climaApp:main' %}">Regresar a Mi Centro Meteorologico</a> |
 <a href="{% url 'climaApp:tarjeta_create' %}">Agregar tarjeta</a> |
