@@ -2,7 +2,7 @@
 {% block content %}
     <center>
 <h1 class = "text-red-700 font-bold text-3xl m-8">¡Eliminar!</h1>
-<p class = "text-xl">¿Estás seguro de que deseas eliminar la tarjeta {{ tarjeta }}?</p>
+<p class = "text-xl">¿Estás seguro de que deseas eliminar la tarjeta "{{ tarjeta.nombre }}"?</p>
 
 <form action="" method="POST">
   {% csrf_token %}
