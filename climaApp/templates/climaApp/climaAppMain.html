@@ -99,14 +99,16 @@
 
 {% else %}
     {# Cuando no hay ciudades que mostrar #}
-    <p>  ¡Aun no has elegido que ciudades seguir! </p>
-    <p> Dirigete a "Mis tarjetas" para elegir las ciudades</p>
+    <p>  ¡Aún no has elegido que ciudades seguir! </p>
+    <p> Dirígete a "Mis tarjetas" para elegir las ciudades.</p>
 
 {% endif %}
 
     {% if user.is_anonymous %}
-        <p> Para elegir que ciudades mostrar debes iniciar sesión </p>
-{#        <p> ¿No tienes una cuenta? Registrate </p>#}
+        <p class="text-xl"> Para elegir que ciudades mostrar, debes
+         <p class="text-xl no-underline hover:underline ml-2"> iniciar sesión. </p>
+
+        {#        <p> ¿No tienes una cuenta? Registrate </p>#}
     {% endif %}
 
 

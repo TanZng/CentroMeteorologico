@@ -1,13 +1,17 @@
 {% extends "base_menu.html" %}
 {% block content %}
-<h1>Delete Ad</h1>
-
-<p>¿Estás seguro de que deseas eliminar la tarjeta {{ tarjeta }}?</p>
+    <center>
+<h1 class = "text-red-700 font-bold text-3xl m-8">¡Eliminar!</h1>
+<p class = "text-xl">¿Estás seguro de que deseas eliminar la tarjeta {{ tarjeta }}?</p>
 
 <form action="" method="POST">
   {% csrf_token %}
-    <input type="submit" value="Sí, eliminar.">
-    <input type="submit" onclick="window.location='{% url 'climaApp:tarjeta_list' %}' ; return false;" value="Cancelar">
+     <h3>
+    <input input class="border border-blue-500 bg-blue-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-600 focus:outline-none focus:shadow-outline" type="submit" onclick="window.location='{% url 'climaApp:tarjeta_list' %}' ; return false;"type="submit" value="Sí, eliminar.">
+    <input input class="border border-red-500 bg-red-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-600 focus:outline-none focus:shadow-outline" type="submit" onclick="window.location='{% url 'climaApp:tarjeta_list' %}' ; return false;"type="submit" onclick="window.location='{% url 'climaApp:tarjeta_list' %}' ; return false;" value="Cancelar">
+     </h3>
 </form>
+    </center>
+
 {% endblock %}
 

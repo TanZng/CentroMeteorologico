@@ -9,9 +9,12 @@
         <h3>{{ tarjeta.nombre }}</h3>
         <p>Ciudad: {{ tarjeta.ciudad }}
             {# Link Editar Trajeta #}
-        (<a class="text-purple-500 no-underline hover:underline"href="{% url 'climaApp:tarjeta_update' tarjeta.id %}">Edit</a> |
-        <a class="text-red-500 no-underline hover:underline"href="{% url 'climaApp:tarjeta_delete' tarjeta.id %}">Delete</a>)
         </p>
+
+        <p>(<a class="font-medium text-purple-500 no-underline hover:underline"href="{% url 'climaApp:tarjeta_update' tarjeta.id %}">Edit</a> |
+        <a class="font-medium text-red-800 no-underline hover:underline"href="{% url 'climaApp:tarjeta_delete' tarjeta.id %}">Delete</a>)
+        </p>
+
       </div>
 
   {% endfor %}
@@ -24,13 +27,15 @@
 
 </p>
 
+
 <p>
-<a class="text-purple-500 no-underline hover:underline"href="{% url 'climaApp:main' %}">Regresar a Mi Centro Meteorologico</a> |
-<a class="text-green-500 no-underline hover:underline"href="{% url 'climaApp:tarjeta_create' %}">Agregar tarjeta</a> |
+<a class="text-purple-500 font-medium no-underline hover:underline"href="{% url 'climaApp:main' %}">Regresar a Mi Centro Meteorologico</a> |
+<a class="text-green-500 font-medium no-underline hover:underline"href="{% url 'climaApp:tarjeta_create' %}">Agregar tarjeta</a> |
 {% if user.is_authenticated %}
-<a href="{% url 'logout' %}?next={% url 'climaApp:main' %}">Logout</a>
+<a class="text-red-800 font-medium no-underline hover:underline"href="{% url 'logout' %}?next={% url 'climaApp:main' %}">Logout</a>
 {% else %}
 <a href="{% url 'login' %}?next={% url 'climaApp:main' %}">Login</a>
 {% endif %}
 </p>
+
 {% endblock %}
