@@ -16,7 +16,7 @@
         <div class="flex flex-col bg-white rounded-xl p-4 w-5/6 md:w-full max-w-sm">
             <!-- Nombre ciudad -->
             <div class="font-bold text-xl">
-                {{ city.city }}
+                {{ city.city }}, {{ city.country }}
             </div>
             <!-- Fecha -->
             <div class="text-sm text-gray-500">
@@ -24,15 +24,19 @@
             </div>
             <!-- Icono -->
             <div class="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-indigo-400 h-55 w-55">
-                {% load static %}
-                <img style="width: 200px" src="https://raw.githubusercontent.com/basmilius/weather-icons/master/production/line/openweathermap/{{ city.icon }}.svg" alt="{{ city.icon }}.svg">
+                 {% load static %}
+                 {% with '/climaApp/'|add:city.icon|add:'.svg' as image %}
+                     <img style="width: 200px" src="{% static image %}" alt="{{ city.icon }}.svg"/>
+                 {% endwith %}
+{#                <img style="width: 200px" src="https://raw.githubusercontent.com/basmilius/weather-icons/master/production/line/openweathermap/{{ city.icon }}.svg" alt="{{ city.icon }}.svg">#}
 {#                <img src="http://openweathermap.org/img/wn/{{ city.icon }}@4x.png" alt="Image">#}
             </div>
             <!-- Info central de temperaturas -->
             <div class="flex flex-row items-center justify-center mt-6">
                 <!-- Temperatura en grande -->
                 <div class="font-medium text-6xl">
-                    {{ city.temperature }}°
+                    {% load l10n %}
+                    {{ city.temperature|unlocalize  }}°
                 </div>
                 <!-- Info central extra/lateral de temperaturas -->
                 <div class="flex flex-col items-center ml-6">
@@ -44,14 +48,14 @@
                     <div class="mt-1">
                         <span class="text-sm"><i class="far fa-long-arrow-up"></i></span>
                         <span class="text-sm font-light text-gray-500">
-                            28°C
+                            {{ city.max|unlocalize  }}°C
                         </span>
                     </div>
                     <!-- Temperatura minima -->
                     <div>
                         <span class="text-sm"><i class="far fa-long-arrow-down"></i></span>
                         <span class="text-sm font-light text-gray-500">
-                            20°C
+                            {{ city.min|unlocalize  }}°C
                         </span>
                     </div>
                 </div>
