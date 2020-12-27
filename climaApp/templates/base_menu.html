@@ -4,17 +4,17 @@
 
 <nav class="font-sans flex flex-col text-center sm:flex-row sm:text-left sm:justify-between py-4 px-6 bg-yellow-500 shadow sm:items-baseline w-full">
  <div class="mb-2 sm:mb-0">
-    <a href="/" class="text-4xl no-underline text-white hover:text-blue-dark">Centro Metereológico</a>
+    <a href="/" class="text-4xl no-underline text-white font-bold hover:text-blue-dark">Centro Metereológico</a>
   </div>
 <div>
    {% if user.is_authenticated %}
 
-       <a class="text-lg no-underline text-yellow-900 hover:underline ml-2" href="{% url 'climaApp:tarjeta_list' %}"> Mis tarjetas </a>  |
-       <a class="text-lg no-underline text-yellow-900 hover:underline ml-2" href="{% url 'logout' %}?next={% url 'climaApp:main' %}"> Logout </a></li>
+       <a class="text-lg no-underline text-yellow-900 font-medium hover:underline ml-2" href="{% url 'climaApp:tarjeta_list' %}"> Mis tarjetas </a>  |
+       <a class="text-lg no-underline text-yellow-900 font-medium hover:underline ml-2" href="{% url 'logout' %}?next={% url 'climaApp:main' %}"> Logout </a></li>
 
    {% else %}
 
-       <a class="text-xl no-underline text-yellow-900 hover:underline ml-2" href="{% url 'login' %}?next={% url 'climaApp:main' %}"> Login </a>
+       <a class="text-xl no-underline text-yellow-900 font-medium hover:underline ml-2" href="{% url 'login' %}?next={% url 'climaApp:main' %}"> Login </a>
 
    {% endif %}
 </div>
