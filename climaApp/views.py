@@ -23,32 +23,40 @@ def getClima(ciudades):
     cl = []
 
     for ciudad in ciudades:
-        #apiUrl = baseUrl + str(ciudad.ciudad)
-        #print(apiUrl)
+        apiUrl = baseUrl + str(ciudad.ciudad)
+        print(apiUrl)
         # response = requests.get(apiUrl)
-        # if response == 401:
-        #     r = response.json()
-        #     ciudad_clima = {
-        #         'city': r['name'],
-        #         'country': r['sys']['country'],
-        #         'temperature': r['main']['temp'],
-        #         'description': r['weather'][0]['description'],
-        #         'viento': r['wind']['speed'],
-        #         'humedad': r['main']['humidity'],
-        #         'visibilidad': r['visibility'],
-        #         'icon': r['weather'][0]['icon'],
-        #     }
-        ciudad_clima = {
-            'nombre_tarjeta': ciudad.nombre,
-            'city': ciudad.ciudad,
-            'country': 'US',
-            'temperature': '12',
-            'description': 'lluvia moderada',
-            'viento': '10.3',
-            'humedad': '76',
-            'visibilidad': '9000',
-            'icon': '10n',
-        }
+        if False:
+            print(f)
+            #if response.status_code == 200:
+            # r = response.json()
+            # ciudad_clima = {
+            #         'nombre_tarjeta': ciudad.nombre,
+            #         'city': r['name'],
+            #         'country': r['sys']['country'],
+            #         'temperature': r['main']['temp'],
+            #         'max': r['main']['temp_max'],
+            #         'min': r['main']['temp_min'],
+            #         'description': r['weather'][0]['description'],
+            #         'viento': r['wind']['speed'],
+            #         'humedad': r['main']['humidity'],
+            #         'visibilidad': r['visibility'],
+            #         'icon': r['weather'][0]['icon'],
+            # }
+        else:
+            ciudad_clima = {
+                'nombre_tarjeta': "ERROR AL OBTENER LOS DATOS",
+                'city': ciudad.ciudad,
+                'country': '404',
+                'temperature': '?',
+                'max': '?',
+                'min': '?',
+                'description': 'Error',
+                'viento': '?',
+                'humedad': '?',
+                'visibilidad': '?',
+                'icon': '50n',
+            }
         cl.append(ciudad_clima)
     context = {'ciudades_list': cl}
     return context
