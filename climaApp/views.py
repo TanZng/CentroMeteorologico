@@ -33,6 +33,9 @@ def getClima(ciudades):
         #         'country': r['sys']['country'],
         #         'temperature': r['main']['temp'],
         #         'description': r['weather'][0]['description'],
+        #         'viento': r['wind']['speed'],
+        #         'humedad': r['main']['humidity'],
+        #         'visibilidad': r['visibility'],
         #         'icon': r['weather'][0]['icon'],
         #     }
         ciudad_clima = {
@@ -40,8 +43,11 @@ def getClima(ciudades):
             'city': ciudad.ciudad,
             'country': 'US',
             'temperature': '12',
-            'description': 'muy nuboso',
-            'icon': '04n',
+            'description': 'lluvia moderada',
+            'viento': '10.3',
+            'humedad': '76',
+            'visibilidad': '9000',
+            'icon': '10n',
         }
         cl.append(ciudad_clima)
     context = {'ciudades_list': cl}
