@@ -104,9 +104,9 @@
 
 {% endif %}
 
+
     {% if user.is_anonymous %}
-        <p class="text-xl"> Para elegir que ciudades mostrar, debes
-          class="text-xl no-underline hover:underline ml-2"> iniciar sesión. </>
+       <p class="text-xl"> Para elegir que ciudades mostrar, debes iniciar sesión <a class="text-xl text-blue-400 no-underline hover:underline ml-2"href="{% url 'login' %}?next={% url 'climaApp:main' %}">aquí. </a> </p>
 
         {#        <p> ¿No tienes una cuenta? Registrate </p>#}
     {% endif %}
