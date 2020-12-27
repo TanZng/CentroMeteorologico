@@ -4,10 +4,62 @@
 <p>
 {% if tarjeta_list %}
 
+<div class="flex flex-col items-center">
+
   {% for tarjeta in tarjeta_list %}
-      <div>
-        <h3>{{ tarjeta.nombre }}</h3>
-        <p>Ciudad: {{ tarjeta.ciudad }}
+      <!-- component -->
+{#<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>#}
+
+<div class="flex items-center justify-center px-5 py-5">
+    <div class="bg-white text-black rounded-xl py-5 px-5 w-full">
+        <div class="flex flex-wrap -mx-3 items-center">
+            <div class="w-full sm:w-1/2 px-3 text-left">
+                <div class="p-5 xl:px-8 md:py-5">
+                    <!-- Nombre de la tarjeta -->
+                    <h3 class="text-2xl break-words font-bold">
+                        Titulo trajeta:
+                        {{ tarjeta.nombre }}
+                    </h3>
+                    <!-- Ciudad -->
+                    <div class="text-xl mb-3 flex md:inline-flex items-center">
+                        <svg class="fill-current w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
+                        <span class="truncate">
+                            {{ tarjeta.ciudad }}
+                        </span>
+                    </div>
+
+                    <!-- Fecha de creacion y actualizacion -->
+                    <p class="text-sm text-gray-500">
+                        Creado: {{ tarjeta.created_at }}
+                    </p>
+                    <p class="text-sm text-gray-500">
+                        Actualizado: {{ tarjeta.updated_at }}
+                    </p>
+                </div>
+            </div>
+            <div class="w-full sm:w-1/2 px-3 text-center">
+                <div class="p-5 xl:px-8 md:py-5">
+                    <!-- Boton editar -->
+                    <a class="mb-2 w-full border border-yellow-500 bg-yellow-500 text-white font-bold hover:bg-yellow-600 select-none focus:outline-none py-2 px-4 rounded-md inline-flex justify-center items-center"
+                       href="{% url 'climaApp:tarjeta_update' tarjeta.id %}">
+                        <svg class="fill-current w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"> <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" /><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" /></svg>
+                        <span>Editar</span>
+                    </a>
+                    <!-- Boton eliminar -->
+                    <a class="mt-2 w-full border border-red-500 bg-red-500 text-white font-bold hover:bg-red-600 select-none focus:outline-none py-2 px-4 rounded-md inline-flex justify-center items-center"
+                       href="{% url 'climaApp:tarjeta_delete' tarjeta.id %}">
+                        <svg class="fill-current w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
+                        <span>Eliminar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{#      <div>#}
+{#        <h3>{{ tarjeta.nombre }}</h3>#}
+{#        <p>Ciudad: {{ tarjeta.ciudad }}#}
             {# Link Editar Trajeta #}
         </p>
 
@@ -16,8 +68,14 @@
         </p>
 
       </div>
+{#        (<a class="text-purple-500 no-underline hover:underline" href="{% url 'climaApp:tarjeta_update' tarjeta.id %}">Edit</a> |#}
+{#        <a href="{% url 'climaApp:tarjeta_delete' tarjeta.id %}">Delete</a>)#}
+{#        </p>#}
+{#      </div>#}
 
   {% endfor %}
+</div>
+
 
 {% else %}
 
