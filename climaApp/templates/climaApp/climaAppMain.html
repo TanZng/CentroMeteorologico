@@ -1,29 +1,125 @@
 {% extends "base_menu.html" %}
 {% block content %}
-    <h1>Mi Centro Meteorologico</h1>
-    <h3>El tiempo de hoy es...</h3>
+{#    <h1 class = "text-3xl"> Mi Centro Meteorologico</h1>#}
+    <h1 class = "text-3xl m-8">El tiempo de hoy es...</h1>
 
 {% if ciudades_list %}
+
+ <!-- Inicia contenedor de tarjetas del clima -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2">
     {# Despliega las ciudades #}
     {% for city in ciudades_list %}
-        <h4>{{ city.nombre_tarjeta }}</h4>
-        <img src="http://openweathermap.org/img/w/{{ city.icon }}.png" alt="Image">
-        <span class="title"> Ciudad: {{ city.city }}</span>
-        <span class="subtitle">{{ city.temperature }}° C</span>
-        <br> <p> desc: {{ city.description }}</p>
+
+    <!-- Trajeta con el clima -->
+    <div class="flex items-center justify-center my-5">
+        <!-- Info superior -->
+        <div class="flex flex-col bg-white rounded-xl p-4 w-5/6 md:w-full max-w-sm">
+            <!-- Nombre ciudad -->
+            <div class="font-bold text-xl">
+                {{ city.city }}, {{ city.country }}
+            </div>
+            <!-- Fecha -->
+            <div class="text-sm text-gray-500">
+                {{ city.nombre_tarjeta }}
+            </div>
+            <!-- Icono -->
+            <div class="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-indigo-400 h-55 w-55">
+                 {% load static %}
+                 {% with '/climaApp/'|add:city.icon|add:'.svg' as image %}
+                     <img style="width: 200px" src="{% static image %}" alt="{{ city.icon }}.svg"/>
+                 {% endwith %}
+{#                <img style="width: 200px" src="https://raw.githubusercontent.com/basmilius/weather-icons/master/production/line/openweathermap/{{ city.icon }}.svg" alt="{{ city.icon }}.svg">#}
+{#                <img src="http://openweathermap.org/img/wn/{{ city.icon }}@4x.png" alt="Image">#}
+            </div>
+            <!-- Info central de temperaturas -->
+            <div class="flex flex-row items-center justify-center mt-6">
+                <!-- Temperatura en grande -->
+                <div class="font-medium text-6xl">
+                    {% load l10n %}
+                    {{ city.temperature|unlocalize  }}°
+                </div>
+                <!-- Info central extra/lateral de temperaturas -->
+                <div class="flex flex-col items-center ml-6">
+                    <!-- Descripcion de la temperatura -->
+                    <div>
+                        {{ city.description|title }}
+                    </div>
+                    <!-- Temperatura maxima -->
+                    <div class="mt-1">
+                        <span class="text-sm"><i class="far fa-long-arrow-up"></i></span>
+                        <span class="text-sm font-light text-gray-500">
+                            {{ city.max|unlocalize  }}°C
+                        </span>
+                    </div>
+                    <!-- Temperatura minima -->
+                    <div>
+                        <span class="text-sm"><i class="far fa-long-arrow-down"></i></span>
+                        <span class="text-sm font-light text-gray-500">
+                            {{ city.min|unlocalize  }}°C
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Info inferior -->
+            <div class="flex flex-row justify-between mt-6">
+                <!-- Velocidad del viento -->
+                <div class="flex flex-col items-center">
+                    <div class="font-medium text-sm text-blue-500">
+                        Viento
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        9m/s
+                    </div>
+                </div>
+                <!-- Porcentaje humedad -->
+                <div class="flex flex-col items-center">
+                    <div class="font-medium text-sm text-blue-800">
+                        Humedad
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        68%
+                    </div>
+                </div>
+                <!-- Visibilidad -->
+                <div class="flex flex-col items-center">
+                    <div class="font-medium text-sm text-pink-900">
+                        Visibilidad
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        10m
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- Fin tarjeta -->
+
+{#        <h4>{{ city.nombre_tarjeta }}</h4>#}
+{#        <img src="http://openweathermap.org/img/wn/{{ city.icon }}@4x.png" alt="Image">#}
+{#        <span class="title"> Ciudad: {{ city.city }}</span>#}
+{#        <span class="subtitle">{{ city.temperature }}° C</span>#}
+{#        <br> <p> desc: {{ city.description }}</p>#}
 
     {% endfor %}
+</div> <!-- Fin contenedor de tarjetas -->
+
 
 {% else %}
     {# Cuando no hay ciudades que mostrar #}
-    <p>  ¡Aun no has elegido que ciudades seguir! </p>
-    <p> Dirigete a "Mis tarjetas" para elegir las ciudades</p>
+    <p>  ¡Aún no has elegido que ciudades seguir! </p>
+    <p> Dirígete a "Mis tarjetas" para elegir las ciudades.</p>
 
 {% endif %}
 
+
     {% if user.is_anonymous %}
-        <p> Para elegir que ciudades mostrar debes iniciar sesión </p>
-        <p> ¿No tienes una cuenta? Registrate </p>
+
+       <p class="text-xl">
+           Para elegir que ciudades mostrar, debes iniciar sesión.
+           <a class="text-xl text-blue-400 no-underline hover:underline ml-2"href="{% url 'login' %}?next={% url 'climaApp:main' %}">
+               aquí.
+           </a>
+       </p>
+        {#        <p> ¿No tienes una cuenta? Registrate </p>#}
     {% endif %}
 
 

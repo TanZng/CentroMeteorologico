@@ -1,23 +1,22 @@
 {% extends "base_tailwind.html" %}
+{% load tailwind_filters %}
 {% block navbar %}
 
-<nav class="navbar navbar-default navbar-inverse">
-  <div class="container-fluid">
-    <div class="text-3xl">
-        <a class="navbar-brand" href="/"> Centro Meteorológico </a>
-    </div>
-    <!-- https://stackoverflow.com/questions/22047251/django-dynamically-get-view-url-and-check-if-its-the-current-page -->
+<nav class="font-sans flex flex-col text-center sm:flex-row sm:text-left sm:justify-between py-4 px-6 bg-yellow-500 shadow sm:items-baseline w-full mb-5">
+ <div class="mb-2 sm:mb-0">
+    <a href="/" class="text-4xl no-underline text-white font-bold hover:text-blue-dark">Centro Metereológico</a>
   </div>
+<div>
    {% if user.is_authenticated %}
 
-       <a href="{% url 'logout' %}?next={% url 'climaApp:main' %}"> Logout </a></li>
-       <br>
-       <a href="{% url 'climaApp:tarjeta_list' %}"> Mis tarjetas </a>
+       <a class="text-lg no-underline text-yellow-900 font-medium hover:underline ml-2" href="{% url 'climaApp:tarjeta_list' %}"> Mis tarjetas </a>  |
+       <a class="text-lg no-underline text-yellow-900 font-medium hover:underline ml-2" href="{% url 'logout' %}?next={% url 'climaApp:main' %}"> Logout </a></li>
 
    {% else %}
 
-       <a href="{% url 'login' %}?next={% url 'climaApp:main' %}"> Login </a>
+       <a class="text-xl no-underline text-yellow-900 font-medium hover:underline ml-2" href="{% url 'login' %}?next={% url 'climaApp:main' %}"> Login </a>
 
    {% endif %}
+</div>
 </nav>
 {% endblock %}

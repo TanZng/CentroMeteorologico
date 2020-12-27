@@ -1,15 +1,16 @@
 {% extends "base_menu.html" %}
-
+{% load tailwind_filters %}
 {% block content %}
 
-{% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+{#{% if form.errors %}#}
+{#  <p>Your username and password didn't match. Please try again.</p>#}
+{#{% endif %}#}
 
 <form method="post" action="{% url 'login' %}">
 {% csrf_token %}
-{{ form.as_p }}
-<input type="submit" class="btn btn-primary" value="Login" />
+{# form.as_p  #}
+{{ form|crispy }}
+<input type="submit" class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline" value="Login" />
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
 {% endblock %}
