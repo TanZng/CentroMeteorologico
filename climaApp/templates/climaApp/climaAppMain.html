@@ -23,8 +23,10 @@
                 {{ city.nombre_tarjeta }}
             </div>
             <!-- Icono -->
-            <div class="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-indigo-400 h-24 w-24">
-                <img src="http://openweathermap.org/img/wn/{{ city.icon }}@4x.png" alt="Image">
+            <div class="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-indigo-400 h-55 w-55">
+                {% load static %}
+                <img style="width: 200px" src="https://raw.githubusercontent.com/basmilius/weather-icons/master/production/line/openweathermap/{{ city.icon }}.svg" alt="{{ city.icon }}.svg">
+{#                <img src="http://openweathermap.org/img/wn/{{ city.icon }}@4x.png" alt="Image">#}
             </div>
             <!-- Info central de temperaturas -->
             <div class="flex flex-row items-center justify-center mt-6">
@@ -106,8 +108,13 @@
 
 
     {% if user.is_anonymous %}
-       <p class="text-xl"> Para elegir que ciudades mostrar, debes iniciar sesión <a class="text-xl text-blue-400 no-underline hover:underline ml-2"href="{% url 'login' %}?next={% url 'climaApp:main' %}">aquí. </a> </p>
 
+       <p class="text-xl">
+           Para elegir que ciudades mostrar, debes iniciar sesión
+           <a class="text-xl text-blue-400 no-underline hover:underline ml-2"href="{% url 'login' %}?next={% url 'climaApp:main' %}">
+               aquí.
+           </a>
+       </p>
         {#        <p> ¿No tienes una cuenta? Registrate </p>#}
     {% endif %}
 
