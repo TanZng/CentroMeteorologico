@@ -8,7 +8,7 @@ class OwnerListView(LoginRequiredMixin, ListView):
     Sub-class the ListView to pass the request to the form.
     """
     def get_queryset(self):
-        print('update get_queryset called')
+        #print('update get_queryset called')
         """ Limit a User to only modifying their own data. """
         qs = super(OwnerListView, self).get_queryset()
         return qs.filter(owner=self.request.user)
