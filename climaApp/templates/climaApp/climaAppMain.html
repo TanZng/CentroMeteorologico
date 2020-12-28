@@ -113,10 +113,11 @@
 
 
     {% if user.is_anonymous %}
-
+        <div class="flex flex-col justify-evenly items-center m-10 text-gray-400">
        <p class="text-md m-8" >
            Para elegir que ciudades mostrar, debes iniciar sesión <a class="text-blue-400 no-underline hover:underline"href="{% url 'login' %}?next={% url 'climaApp:main' %}">aquí.</a>
        </p>
+        </div>
         {#        <p> ¿No tienes una cuenta? Registrate </p>#}
     {% endif %}
 
