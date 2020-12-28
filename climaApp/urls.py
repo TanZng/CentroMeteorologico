@@ -15,6 +15,8 @@ urlpatterns = [
     path('tarjeta/create', views.TarjetaCreateView.as_view(success_url=reverse_lazy('climaApp:tarjeta_list')), name='tarjeta_create'),
     path('tarjeta/<int:pk>/update', views.TarjetaUpdateView.as_view(success_url=reverse_lazy('climaApp:tarjeta_list')), name='tarjeta_update'),
     path('tarjeta/<int:pk>/delete', views.TarjetaDeleteView.as_view(success_url=reverse_lazy('climaApp:tarjeta_list')), name='tarjeta_delete'),
+
+    path('ajax/load-cities/', views.load_cities, name='ajax_load_cities'),  # <-- AJAX
 ]
 
 # Serve the static HTML

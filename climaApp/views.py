@@ -5,7 +5,9 @@ from django.views.generic import UpdateView
 
 from .config.remote import baseUrl
 import requests
-from .models import Tarjeta
+
+from .forms import TarjetaForm
+from .models import Tarjeta, Ciudad
 from .owner import OwnerCreateView, OwnerListView, OwnerUpdateView, OwnerDetailView, OwnerDeleteView
 
 
@@ -73,13 +75,19 @@ class TarjetaDetailView(OwnerDetailView):
 
 class TarjetaCreateView(OwnerCreateView):
     model = Tarjeta
-    fields = ['nombre', 'ciudad']
+    form_class = TarjetaForm
 
 
 class TarjetaUpdateView(OwnerUpdateView):
     model = Tarjeta
-    fields = ['nombre', 'ciudad']
+    form_class = TarjetaForm
 
 
 class TarjetaDeleteView(OwnerDeleteView):
     model = Tarjeta
+
+def load_cities(request):
+    pais_id = request.GET.get('pais')
+    ciudades = Ciudad.objects.filter(pais=pais_id).order_by('nombre')
+    print("CIUDADES: .", ciudades)
+    return render(request, 'climaApp/ciudad_dropdown_list_options.html', {'ciudades': ciudades})

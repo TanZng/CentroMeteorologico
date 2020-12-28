@@ -1,7 +1,7 @@
 {% extends "base_menu.html" %}
 {% load tailwind_filters %}
 {% block content %}
-  <form action="" method="post">
+  <form action="" method="post" id="tarjetaForm" data-cities-url="{% url 'climaApp:ajax_load_cities' %}" novalidate>
     {% csrf_token %}
 {#    <table>#}
 {#    {{ form.as_table }}#}
@@ -12,4 +12,25 @@
     {# boton Cancel#}
     <input class="border border-red-500 bg-red-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-600 focus:outline-none focus:shadow-outline" type="submit" onclick="window.location='{% url 'climaApp:tarjeta_list' %}' ; return false;" value="Cancelar">
   </form>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+      // Se detectaran los cambios en el select drop list de "pais"
+    $("[name='pais']").change(function () {
+      var url = $("#tarjetaForm").attr("data-cities-url");  // get the url of the `load_cities` view
+      var paisId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'pais': paisId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("[name='ciudad']").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
+
 {% endblock %}
