@@ -2,16 +2,18 @@
 {% block content %}
 <h1 class = "text-3xl m-8">Mis tarjetas</h1>
 
-<p>
+<div class="mx-8">
 
 <a class="text-purple-500 font-medium no-underline hover:underline"href="{% url 'climaApp:main' %}">
-    Regresar a Mi Centro Meteorologico
-</a> |
+    <svg class="inline-flex justify-center items-center fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" /></svg>
+    Regresar a Mi Centro Meteorologico</a>
+|
 <a class="text-green-500 font-medium no-underline hover:underline"href="{% url 'climaApp:tarjeta_create' %}">
+    <svg class="inline-flex justify-center items-center fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V8z" clip-rule="evenodd" /></svg>
     Agregar tarjeta
 </a>
 
-</p>
+</div>
 
 {% if tarjeta_list %}
 
@@ -35,7 +37,7 @@
                     <div class="text-xl mb-3 flex md:inline-flex items-center">
                         <svg class="fill-current w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path> </svg>
                         <span class="truncate">
-                            {{ tarjeta.ciudad }}
+                            {{ tarjeta.ciudad }}, {{ tarjeta.pais.iso }}
                         </span>
                     </div>
 
