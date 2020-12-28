@@ -28,24 +28,24 @@ def getClima(tarjetas):
         apiUrl = baseUrl + str(tarjeta.ciudad) + "," + str(tarjeta.pais.iso)
         print(apiUrl)
         response = requests.get(apiUrl)
-        if False:
-            print(f)
-        # if response.status_code == 200:
-        #     r = response.json()
-        #     ciudad_clima = {
-        #             'nombre_tarjeta': tarjeta.nombre,
-        #             'city': r['name'],
-        #             'country': r['sys']['country'],
-        #             'temperature': r['main']['temp'],
-        #             'max': r['main']['temp_max'],
-        #             'min': r['main']['temp_min'],
-        #             'description': r['weather'][0]['description'],
-        #             'viento': r['wind']['speed'],
-        #             'humedad': r['main']['humidity'],
-        #             'visibilidad': r['visibility'],
-        #             'icon': r['weather'][0]['icon'],
-        #     }
-        #     #print("HOLA", ciudad_clima)
+        # if False:
+        #     print(f)
+        if response.status_code == 200:
+            r = response.json()
+            ciudad_clima = {
+                    'nombre_tarjeta': tarjeta.nombre,
+                    'city': r['name'],
+                    'country': r['sys']['country'],
+                    'temperature': r['main']['temp'],
+                    'max': r['main']['temp_max'],
+                    'min': r['main']['temp_min'],
+                    'description': r['weather'][0]['description'],
+                    'viento': r['wind']['speed'],
+                    'humedad': r['main']['humidity'],
+                    'visibilidad': r['visibility'],
+                    'icon': r['weather'][0]['icon'],
+            }
+            #print("HOLA", ciudad_clima)
         else:
             ciudad_clima = {
                 'nombre_tarjeta': "ERROR AL OBTENER LOS DATOS",
