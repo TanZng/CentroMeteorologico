@@ -5,48 +5,51 @@ from django.views.generic import UpdateView
 
 from .config.remote import baseUrl
 import requests
-from .models import Tarjeta
+
+from .forms import TarjetaForm
+from .models import Tarjeta, Ciudad
 from .owner import OwnerCreateView, OwnerListView, OwnerUpdateView, OwnerDetailView, OwnerDeleteView
 
 
 def index(request):
     if request.user.is_anonymous:
-        ciudades = Tarjeta.objects.filter(owner=1)
+        tarjetas = Tarjeta.objects.filter(owner=1)
     else:
-        ciudades = Tarjeta.objects.filter(owner=request.user)
+        tarjetas = Tarjeta.objects.filter(owner=request.user)
 
-    context = getClima(ciudades)
+    context = getClima(tarjetas)
     return render(request, 'climaApp/climaAppMain.html', context)
 
-def getClima(ciudades):
+def getClima(tarjetas):
     # lista de ciudades para el contexto
     cl = []
 
-    for ciudad in ciudades:
-        apiUrl = baseUrl + str(ciudad.ciudad)
+    for tarjeta in tarjetas:
+        apiUrl = baseUrl + str(tarjeta.ciudad) + "," + str(tarjeta.pais.iso)
         print(apiUrl)
-        # response = requests.get(apiUrl)
+        response = requests.get(apiUrl)
         if False:
             print(f)
-            #if response.status_code == 200:
-            # r = response.json()
-            # ciudad_clima = {
-            #         'nombre_tarjeta': ciudad.nombre,
-            #         'city': r['name'],
-            #         'country': r['sys']['country'],
-            #         'temperature': r['main']['temp'],
-            #         'max': r['main']['temp_max'],
-            #         'min': r['main']['temp_min'],
-            #         'description': r['weather'][0]['description'],
-            #         'viento': r['wind']['speed'],
-            #         'humedad': r['main']['humidity'],
-            #         'visibilidad': r['visibility'],
-            #         'icon': r['weather'][0]['icon'],
-            # }
+        # if response.status_code == 200:
+        #     r = response.json()
+        #     ciudad_clima = {
+        #             'nombre_tarjeta': tarjeta.nombre,
+        #             'city': r['name'],
+        #             'country': r['sys']['country'],
+        #             'temperature': r['main']['temp'],
+        #             'max': r['main']['temp_max'],
+        #             'min': r['main']['temp_min'],
+        #             'description': r['weather'][0]['description'],
+        #             'viento': r['wind']['speed'],
+        #             'humedad': r['main']['humidity'],
+        #             'visibilidad': r['visibility'],
+        #             'icon': r['weather'][0]['icon'],
+        #     }
+        #     #print("HOLA", ciudad_clima)
         else:
             ciudad_clima = {
                 'nombre_tarjeta': "ERROR AL OBTENER LOS DATOS",
-                'city': ciudad.ciudad,
+                'city': tarjeta.ciudad,
                 'country': '404',
                 'temperature': '?',
                 'max': '?',
@@ -73,13 +76,19 @@ class TarjetaDetailView(OwnerDetailView):
 
 class TarjetaCreateView(OwnerCreateView):
     model = Tarjeta
-    fields = ['nombre', 'ciudad']
+    form_class = TarjetaForm
 
 
 class TarjetaUpdateView(OwnerUpdateView):
     model = Tarjeta
-    fields = ['nombre', 'ciudad']
+    form_class = TarjetaForm
 
 
 class TarjetaDeleteView(OwnerDeleteView):
     model = Tarjeta
+
+def load_cities(request):
+    pais_id = request.GET.get('pais')
+    ciudades = Ciudad.objects.filter(pais=pais_id).order_by('nombre')
+    #print("CIUDADES: .", ciudades)
+    return render(request, 'climaApp/ciudad_dropdown_list_options.html', {'ciudades': ciudades})
