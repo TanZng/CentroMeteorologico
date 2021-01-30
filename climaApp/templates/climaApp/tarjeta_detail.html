@@ -1,0 +1,171 @@
+{% extends "base_menu.html" %}
+
+{% block head %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+
+    <!--Variables con datos y colores graficas-->
+    <script>
+    var dias = {{ dias|safe }};
+    var temperaturas = {{ temps|safe }};
+    var vientos = {{ vientos|safe }};
+    var humedades = {{ humedades|safe }};
+    var visibilidades = {{ visibilidades|safe }};
+
+    var rojo = "rgb(229,43,80)";
+    var azul = "rgb(124,185,232)";
+    var morado = "rgb(153,102,255)";
+    var verde = "rgb(176,191,26)";
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="mx-8">
+
+<a class="text-purple-500 font-medium no-underline hover:underline"href="{% url 'climaApp:main' %}">
+    <svg class="inline-flex justify-center items-center fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" /></svg>
+    Regresar a Mi Centro Meteorologico</a>
+
+    </div>
+    <!-- Ref https://github.com/tailwindtoolbox/Admin-Template-Day -->
+    <!--Container-->
+     <h1 class="text-center text-3xl font-black">{{ tarjeta.ciudad }}, {{ tarjeta.pais.iso }}</h1>
+    <h2 class="text-center mt-1">Pronóstico para los próximos 5 días</h2>
+    <div class="container w-full mx-auto pt-3">
+
+            <!--Graficas-->
+            <div class="flex flex-row flex-wrap flex-grow mt-2">
+
+                <div class="w-full md:w-1/2 p-3">
+                    <!--Graph Card-->
+                    <div class="bg-white rounded">
+                        <div class="border-b p-3">
+                            <h5 class="font-bold uppercase text-gray-600">Temperatura</h5>
+                        </div>
+                        <div class="p-5">
+                            <canvas id="chartjs-7" class="chartjs" width="undefined" height="undefined"></canvas>
+                            <script>
+                            new Chart(document.getElementById("chartjs-7"), {
+                                "type": "line",
+                                "data": {
+                                    "labels": dias,
+                                    "datasets": [{
+                                        "label": "°C",
+                                        "data": temperaturas,
+                                        "fill": false,
+                                        "borderColor": rojo,
+                                        "lineTension": 0.1,
+                                        "pointBackgroundColor": rojo,
+                                        "pointBorderColor": rojo,
+                                        "radius": 4
+                                    }]
+                                },
+                                "options": {}
+                            });
+                            </script>
+                        </div>
+                    </div>
+                    <!--/Graph Card-->
+                </div>
+
+                <div class="w-full md:w-1/2 p-3">
+                    <!--Graph Card-->
+                    <div class="bg-white rounded">
+                        <div class="border-b p-3">
+                            <h5 class="font-bold uppercase text-gray-600">Viento</h5>
+                        </div>
+                        <div class="p-5">
+                            <canvas id="chartjs-0" class="chartjs" width="undefined" height="undefined"></canvas>
+                            <script>
+                            new Chart(document.getElementById("chartjs-0"), {
+                                "type": "line",
+                                "data": {
+                                    "labels": dias,
+                                    "datasets": [{
+                                        "label": "m/s",
+                                        "data": vientos,
+                                        "fill": false,
+                                        "borderColor": azul,
+                                        "lineTension": 0.1,
+                                        "pointBackgroundColor": azul,
+                                        "pointBorderColor": azul,
+                                        "radius": 4
+                                    }]
+                                },
+                                "options": {}
+                            });
+                            </script>
+                        </div>
+                    </div>
+                    <!--/Graph Card-->
+                </div>
+
+                <div class="w-full md:w-1/2 xl:w-1/3 p-3">
+                    <!--Graph Card-->
+                    <div class="bg-white rounded">
+                        <div class="border-b p-3">
+                            <h5 class="font-bold uppercase text-gray-600">Humedad</h5>
+                        </div>
+                        <div class="p-5">
+                            <canvas id="chartjs-1" class="chartjs" width="undefined" height="undefined"></canvas>
+                            <script>
+                            new Chart(document.getElementById("chartjs-1"), {
+                                "type": "line",
+                                "data": {
+                                    "labels": dias,
+                                    "datasets": [{
+                                        "label": "%",
+                                        "data": humedades,
+                                        "fill": false,
+                                        "borderColor": morado,
+                                        "lineTension": 0.1,
+                                        "pointBackgroundColor": morado,
+                                        "pointBorderColor": morado,
+                                        "radius": 4
+                                    }]
+                                },
+                                "options": {}
+                            });
+                            </script>
+                        </div>
+                    </div>
+                    <!--/Graph Card-->
+                </div>
+
+                <div class="w-full md:w-1/2 xl:w-1/3 p-3">
+                    <!--Graph Card-->
+                    <div class="bg-white rounded">
+                        <div class="border-b p-3">
+                            <h5 class="font-bold uppercase text-gray-600">Visibilidad</h5>
+                        </div>
+                        <div class="p-5"><canvas id="chartjs-4" class="chartjs" width="undefined" height="undefined"></canvas>
+                            <script>
+                            new Chart(document.getElementById("chartjs-4"), {
+                                "type": "line",
+                                "data": {
+                                    "labels": dias,
+                                    "datasets": [{
+                                        "label": "m",
+                                        "data": visibilidades,
+                                        "fill": false,
+                                        "borderColor": verde,
+                                        "lineTension": 0.1,
+                                        "pointBackgroundColor": verde,
+                                        "pointBorderColor": verde,
+                                        "radius": 4
+                                    }]
+                                },
+                                "options": {}
+                            });
+                            </script>
+                        </div>
+                    </div>
+                    <!--/Graph Card-->
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--/container-->
+{% endblock %}
